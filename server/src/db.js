@@ -18,12 +18,13 @@ const sequelize = new Sequelize(
   }
 );
 
+// inicializa los modelos
 orderModel(sequelize);
 cartModel(sequelize);
 productModel(sequelize);
 userModel(sequelize);
 
-const { User, Order, Product } = sequelize.models;
+const { User, Order, Product, Cart } = sequelize.models;
 
 Product.belongsToMany(User, { through: "ProductsUser" });
 User.belongsToMany(Product, { through: "ProductsUser" });
