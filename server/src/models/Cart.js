@@ -18,10 +18,9 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 0,
       },
-      sizeId: {
-        type: DataTypes.INTEGER, // O el tipo de dato adecuado para almacenar la lista de productos
+      color: {
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 0,
       },
       quantity: {
         type: DataTypes.INTEGER,
