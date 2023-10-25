@@ -4,7 +4,7 @@ const { conn } = require("./src/db.js");
 const dataProducts = require("./api/db.json");
 
 const { Product, User } = require("./src/db");
-const PORT = 3000;
+const PORT = 3001;
 
 const ratingCalculator = require("./src/utils/helpers/Average/ratingAvera");
 
