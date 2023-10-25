@@ -18,7 +18,7 @@ const createProduct = async (data) => {
   };
 
   let {
-    id,
+    id: productId,
     name,
     description,
     category,
