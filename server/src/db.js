@@ -18,6 +18,7 @@ const sequelize = new Sequelize(
   }
 );
 
+// inicializa los modelos
 orderModel(sequelize);
 cartModel(sequelize);
 productModel(sequelize);
