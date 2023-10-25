@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path: './api/.env'});
 const { Sequelize } = require("sequelize");
 
 // aca van las rutas de los modelos 
@@ -18,6 +18,7 @@ const sequelize = new Sequelize(
   }
 );
 
+// inicializa los modelos
 orderModel(sequelize);
 cartModel(sequelize);
 productModel(sequelize);
