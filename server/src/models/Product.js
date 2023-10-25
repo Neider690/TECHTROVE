@@ -5,9 +5,8 @@ module.exports = (sequelize) => {
         "Product",
         {
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 primaryKey: true,
-                autoIncrement: true,
             },
 
             name: {
@@ -63,13 +62,7 @@ module.exports = (sequelize) => {
             discount: {
                 type: DataTypes.FLOAT,
                 defaultValue: 0.0,
-            },
-
-            deleted: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
-                default: false,
-            },
+            }
         },
         { timestamps: false }
     );
