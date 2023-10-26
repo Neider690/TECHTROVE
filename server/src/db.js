@@ -1,4 +1,4 @@
-require("dotenv").config({path: './api/.env'});
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
 // aca van las rutas de los modelos 
