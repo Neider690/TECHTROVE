@@ -39,6 +39,7 @@ const getFilteredProducts = async (category, min, max, order, page) => {
   page = page && page > 0 ? page : 1;
 
   return getPage(page, products);
+  return products;
 };
 
 module.exports = getFilteredProducts;

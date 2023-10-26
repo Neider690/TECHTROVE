@@ -9,7 +9,7 @@ const PORT = 3001;
 const ratingCalculator = require("./src/utils/helpers/Average/ratingAvera");
 
 conn
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     server.listen(PORT, async () => {
       let idHard = "SKU000";

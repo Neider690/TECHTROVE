@@ -6,6 +6,8 @@ const updateUser = async (clientId, data, fileUrl, filePath) => {
   const user = await db.User.findOne({
     where: { clientId },
   });
+  //console.log(clientId)
+  //const user = await db.User.findByPk(clientId);
 
   if (!user) throw new Error("User not found");
 
