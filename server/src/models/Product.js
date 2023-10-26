@@ -35,9 +35,9 @@ module.exports = (sequelize) => {
                 allowNull: true,
             },
 
-            isAvalible: {
+            isAvailible: {
                 type: DataTypes.BOOLEAN,
-                allowNull: true,
+                allowNull: false,
             },
 
             price: {

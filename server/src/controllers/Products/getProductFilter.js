@@ -1,5 +1,5 @@
 const db = require("../../db");
-const getPage = require("./getProductsPage");
+// const getPage = require("./getProductsPage");
 
 const getFilteredProducts = async (category, min, max, order, page) => {
   let products = await db.Product.findAll();
