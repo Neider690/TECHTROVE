@@ -1,8 +1,13 @@
 const { Router, query } = require("express");
-const getFilteredProductsHandler = require("../controllers/Products/getProductFilter");
+const getProductFilter = require("../controllers/Products/getProductFilter");
 const getAllProducts = require("../controllers/Products/getAllProducts");
 const getProductById = require("../controllers/Products/getProductById");
 const createProduct = require("../controllers/Products/createProduct");
+const putProduct = require("../controllers/Products/putProducts");
+const putRatingProducts = require("../controllers/Products/putRatingProducts");
+const deleProductById = require("../controllers/Products/deleProductById");
+
+
 
 const router = Router();
 
@@ -12,23 +17,11 @@ router.get("/filter", async (req, res) => {
   try {
     const { category, min, max, order } = req.query;
 
-    let products = await getFilteredProductsHandler(
-      category,
-      min,
-      max,
-      order,
-
-    );
-    if (products.results.length === 0) {
-      res
-        .status(400)
-        .json({ mensaje: "There are no products matching the filters" });
-    } else {
+    let products = await getProductFilter(category,min,max,order,);
       res.status(200).json(products);
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ error: error.message });
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({ error: error.message });
   }
 });
 
@@ -82,6 +75,7 @@ router.post("/create", async (req, res) => {
 
 /*----               Modificar producto          ----*/
 router.put("/update/:id", async (req, res) => {
+  console.log("Angeel");
   try {
     const { id } = req.params;
     const data = req.body;
@@ -102,7 +96,9 @@ router.put("/rating/:id", async (req, res) => {
     const { id } = req.params;
     const { rating } = req.body;
 
-    const product = await putRatingProduct(id, rating);
+
+
+    const product = await putRatingProducts(id, rating);
     res.json(product);
   } catch (error) {
     console.log(error.message);
@@ -115,7 +111,7 @@ router.put("/rating/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await deleteProduct(id);
+    await deleProductById(id);
     res.status(200).json({ message: "Product successfully removed" });
   } catch (error) {
     console.error(error.message);
