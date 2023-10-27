@@ -11,10 +11,11 @@ const generateSKU = () => {
   return sku;
 };
 
-const createProduct = async (data) => {
+const createProduct = async (data, imageProfile) => {
   const product = {
     ...data,
     id: data.SKU ? data.SKU : generateSKU(),
+    image: {url: imageProfile.url, public_id: imageProfile.public_id}
   };
 
   let {
