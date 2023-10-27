@@ -1,4 +1,8 @@
 const {Router} = require("express")
+const getAllOrders = require("../controllers/Orders/getAllOrders")
+const getOrder = require("../controllers/Orders/getOrders")
+const getOrderPerId = require("../controllers/Orders/getOrderPerId")
+const createOrder = require("../controllers/Orders/createOrder")
 
 const routerOrder = Router();
 
