@@ -28,10 +28,10 @@ router.get("/filter", async (req, res) => {
 /*----            Traer productos             ----*/
 router.get("/", async (req, res) => {
   try {
-    const { name } = req.query;
-
+    const { name } = req.query; 
+    console.log(name);
     let products = name ? await getAllProducts(name) : await getAllProducts();
-
+    console.log(products);
     res.json(products);
   } catch (error) {
     console.log(error.message);
