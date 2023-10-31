@@ -1,12 +1,12 @@
 const db = require("../../db");
 const { sendRegistrationEmail } = require("../../utils/email");
 
-const signUp = async (clientId, name, email, photo) => {
+const signUp = async (clientId, name, email, imageProfile) => {
   const newUser = await db.User.create({
     clientId,
     name,
     email,
-    photo,
+    image:{url: imageProfile.url, public_id: imageProfile.public_id},
   });
 
   sendRegistrationEmail(newUser.clientId);

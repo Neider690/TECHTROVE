@@ -6,8 +6,9 @@ const createProduct = require("../controllers/Products/createProduct");
 const putProduct = require("../controllers/Products/putProducts");
 const putRatingProducts = require("../controllers/Products/putRatingProducts");
 const deleProductById = require("../controllers/Products/deleProductById");
-
-
+const fileUpload = require("express-fileupload");
+const fs = require("fs-extra")
+const {uploadImage, updateImageUser} = require("../utils/helpers/Cloudinary/cloudinary")
 
 const router = Router();
 
@@ -40,7 +41,6 @@ router.get("/", async (req, res) => {
 });
 
 
-
 //get product id
   router.get("/:id", async (req, res) => {
   try {
@@ -60,13 +60,23 @@ router.get("/", async (req, res) => {
 
 /*----            Crear producto               ----*/
 
-router.post("/create", async (req, res) => {
+router.post("/create", fileUpload({
+  useTempFiles : true,
+  tempFileDir : './uploads'
+}), async (req, res) => {
   try {
     const data = req.body;
 
-    const newProduct = await createProduct(data);
+    if(req.files?.image){
+      const imageProfile = await uploadImage(req.files.image.tempFilePath)
+      fs.unlink(req.files.image.tempFilePath)
 
-    res.status(200).json(newProduct);
+      const newProduct = await createProduct(data, imageProfile);
+
+      res.status(200).json(newProduct);
+    }
+
+   
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });
@@ -74,15 +84,28 @@ router.post("/create", async (req, res) => {
 });
 
 /*----               Modificar producto          ----*/
-router.put("/update/:id", async (req, res) => {
-  console.log("Angeel");
+router.put("/update/:id", fileUpload({
+  useTempFiles : true,
+  tempFileDir : './uploads'
+}), async (req, res) => {
   try {
     const { id } = req.params;
     const data = req.body;
 
-    const product = await putProduct(id, data);
+    if(req.files?.image){
+      
+      const products = await getProductById(id);
 
-    res.status(200).json(product);
+      const imageProfile = await updateImageUser(req.files.image.tempFilePath, products.image.public_id)
+      const {url, public_id} = imageProfile
+      fs.unlink(req.files.image.tempFilePath)
+      
+
+      const product = await putProduct(id, data, url, public_id);
+  
+      res.status(200).json(product);
+    }
+    
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });

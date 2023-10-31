@@ -5,7 +5,10 @@ const signUp = require("../controllers/Users/singUp.js")
 const deleteUser = require("../controllers/Users/deleteUsers.js")
 const restoreUser = require("../controllers/Users/restoreUser.js")
 const putUser = require("../controllers/Users/putUsers.js")
+const fileUpload = require("express-fileupload");
 const fs = require("fs-extra");
+const {uploadImage, updateImageUser} = require("../utils/helpers/Cloudinary/cloudinary")
+
 
 
 const userRouter = Router();
@@ -24,11 +27,11 @@ userRouter.get("/:id", async (req, res) =>{
         const {id} = req.params;
         
         const user = await getUser(id)
-        //if(!user){
-        //    res.status(404).json({error: `Usuario no encontrado con este id: ${id}`})
-        //} else{
+        if(!user){
+            res.status(404).json({error: `Usuario no encontrado con este id: ${id}`})
+        } else{
             res.status(200).json(user)
-        //}
+        }
 
     } catch (error) {
         res.status(404).json(error.message)   
@@ -36,13 +39,22 @@ userRouter.get("/:id", async (req, res) =>{
 })
 
 
-userRouter.post("/signUp", async (req, res) => {
+userRouter.post("/signUp",fileUpload({
+  useTempFiles : true,
+  tempFileDir : './uploads'
+}) ,async (req, res) => {
     try {
-      console.log(req.body);
-      const { clientId, name, email, photo } = req.body;
-      const response = await signUp(clientId, name, email, photo);
+
+      const { clientId, name, email } = req.body;
+
+      if(req.files?.image){
+        const imageProfile = await uploadImage(req.files.image.tempFilePath)
+        fs.unlink(req.files.image.tempFilePath)
+
+        const response = await signUp(clientId, name, email, imageProfile);
+        res.status(200).json(response);
+      }
     
-      res.status(200).json(response);
     } catch (error) {
       console.log(error.message);
       res.status(404).json({ error: error.message });
@@ -76,22 +88,24 @@ userRouter.post("/signUp", async (req, res) => {
   });
 
   //ACTULIAR USUARIO 
-  // FALTA PROBAR
-  userRouter.put("/update/:id", async (req, res) => {
+  userRouter.put("/update/:id",fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+  }) ,async (req, res) => {
     try {
       const { id } = req.params;
       const data = req.body;
-  
-      const fileUrl = data.photo ?? "";
-  
-      const filePath = req.files ? req.files.image.tempFilePath : "";
-  
-      const user = await putUser(id, data, fileUrl, filePath);
-  
-      if (filePath) {
-        await fs.unlink(filePath);
+      
+      if(req.files?.image){
+        const userImage = await getUser(id)
+        const imageProfile = await updateImageUser(req.files.image.tempFilePath, userImage.image.public_id)
+        const {url, public_id} = imageProfile
+        fs.unlink(req.files.image.tempFilePath)
+
+        const user = await putUser(id, data, url, public_id);
+        res.status(200).json(user);
       }
-      res.status(200).json(user);
+
     } catch (error) {
       console.log(error.message);
       res.status(400).json({ error: error.message });
