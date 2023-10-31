@@ -19,6 +19,7 @@ const getProducts = async (name) => {
     discount: p.discount,
   }))
 
+  
   if (name) {
     const productName = minymayusProducts.filter(objeto => 
       objeto.name.toLowerCase().includes(name.toLowerCase()))
