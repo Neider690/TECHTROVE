@@ -45,15 +45,19 @@ userRouter.post("/signUp",fileUpload({
 }) ,async (req, res) => {
     try {
 
-      const { clientId, name, email } = req.body;
+      // const { clientId, name, email } = req.body;
+       const user = req.body;
 
-      if(req.files?.image){
-        const imageProfile = await uploadImage(req.files.image.tempFilePath)
-        fs.unlink(req.files.image.tempFilePath)
+       console.log(user)
+      
 
-        const response = await signUp(clientId, name, email, imageProfile);
+      // if(req.files?.image){
+      //   const imageProfile = await uploadImage(req.files.image.tempFilePath)
+      //   fs.unlink(req.files.image.tempFilePath)
+
+      const response = await signUp(user);
         res.status(200).json(response);
-      }
+      //}
     
     } catch (error) {
       console.log(error.message);
@@ -87,7 +91,7 @@ userRouter.post("/signUp",fileUpload({
     }
   });
 
-  //ACTULIAR USUARIO 
+  //ACTULIZAR USUARIO 
   userRouter.put("/update/:id",fileUpload({
     useTempFiles : true,
     tempFileDir : './uploads'
