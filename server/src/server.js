@@ -5,7 +5,6 @@ const cors = require("cors");
 const helmet = require("helmet");
 const mercadopago = require("mercadopago")
 
-
 const server = express();
 
 mercadopago.configure({
