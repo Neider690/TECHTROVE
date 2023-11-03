@@ -70,6 +70,12 @@ const receiveWebHook = async (req, res) => {
           );
           if (createUserResponse.status === 200) {
             console.log("Order Created");
+           // Aquí se llama a la función sendPurchaseEmail si se completa el pago
+           const user = params.userId ;
+           const order = paymentId;
+
+           // Llamar a la función sendPurchaseEmail con el usuario y los detalles de la orden
+           sendPurchaseEmail(user, order); 
           }
         }
       } catch (error) {

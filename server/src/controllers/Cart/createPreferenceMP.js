@@ -1,19 +1,19 @@
 const { User } = require("../../db");
-const mercadopago = require("mercadopago");
-
+const mercadopago = require("mercadopago")
 const createPreference = async (req, res) => {
   try {
 
     const { items, transaction_amount, userId } = req.body;
     console.log('USER:',userId);
+    console.log('ITEMS:',items);
     let preference = {
       transaction_amount,
       items,
       back_urls: {
         success: 'http://localhost:5173/',
       },
-      //CAMBIAR URL DE NOTIFICACIONES MERCADOPAGO
-      notification_url: `https://13a7-2800-810-5ea-82b6-65a6-9426-c179-f589.ngrok-free.app/api/payment/webhook/${userId}`,
+      //URL DE NOTIFICACIONES MERCADOPAGO
+      notification_url: `https://4fab-186-28-78-10.ngrok-free.app/api/cart/webhook/${userId}`,
     };
 
     const response = await mercadopago.preferences.create(preference);

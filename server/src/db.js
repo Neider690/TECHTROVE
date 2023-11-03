@@ -24,13 +24,17 @@ cartModel(sequelize);
 productModel(sequelize);
 userModel(sequelize);
 
-const { User, Order, Product } = sequelize.models;
+const { User, Order, Product, Cart} = sequelize.models;
 
 Product.belongsToMany(User, { through: "ProductsUser" });
 User.belongsToMany(Product, { through: "ProductsUser" });
 
-User.hasMany(Order);
-Order.belongsTo(User);
+User.hasMany(Order, { foreignKey: 'userId' });
+Order.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasOne(Cart, { foreignKey: 'userId' });
+Cart.belongsTo(User, { foreignKey: 'userId' });
+
 
 module.exports = {
   ...sequelize.models,
