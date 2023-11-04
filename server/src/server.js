@@ -19,7 +19,22 @@ server.use(helmet.contentSecurityPolicy({
 server.use(express.urlencoded({ extended: true }));
 server.use(morgan("dev"));
 server.use(express.json());
-server.use(cors());
+server.use(cors())
+// const allowedOrigins = [
+//   //"https://deploy",
+//   "http://localhost:5173", 
+// ];
+// server.use(cors({
+//   origin: function (origin, callback) {
+    
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("No permitido por CORS"));
+//     }
+//   },
+//   credentials: true,
+// }));
 
 server.use("/api", router);
 
