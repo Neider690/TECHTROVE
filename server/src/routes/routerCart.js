@@ -5,7 +5,7 @@ const receiveWebHookMP = require("../controllers/Cart/recieveWebHook");
 
 const routerCart = Router();
 
-routerCart.post("/create-preference", createPreferenceMP);
+routerCart.post("/create-order", createPreferenceMP);
 routerCart.post("/webhook/:userId", receiveWebHookMP);
 
 

@@ -34,11 +34,11 @@ const createPreference = async (req, res) => {
       auto_return: "approved",
     });
 
-    console.log("Result de Create Order", result);
+   // console.log("Result de Create Order", result);
 
 
-    const data = response.body;
-    console.log(data);
+    const data = result.body;
+    console.log("data en el back", data);
     res.status(200).json(data);
   } catch (error) {
     console.error(error);
