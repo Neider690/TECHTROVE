@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
     const { name } = req.query; 
     console.log(name);
     let products = name ? await getAllProducts(name) : await getAllProducts();
-    console.log(products);
+   // console.log(products);
     res.json(products);
   } catch (error) {
     console.log(error.message);
