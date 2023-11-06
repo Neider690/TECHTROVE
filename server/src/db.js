@@ -6,6 +6,7 @@ const orderModel = require("./models/Order");
 const productModel = require ("./models/Product");
 const userModel = require("./models/User");
 const cartModel = require("./models/Cart")
+const brandModel = require("./models/Brands");
 
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
@@ -23,14 +24,18 @@ orderModel(sequelize);
 cartModel(sequelize);
 productModel(sequelize);
 userModel(sequelize);
+brandModel(sequelize);
 
-const { User, Order, Product } = sequelize.models;
+const { User, Order, Product, Brands } = sequelize.models;
 
 Product.belongsToMany(User, { through: "ProductsUser" });
 User.belongsToMany(Product, { through: "ProductsUser" });
-
+// Brands.belongsToMany(Product, { through: "ProductsBrand" });
+Product.hasOne(Brands)
 User.hasMany(Order);
 Order.belongsTo(User);
+Brands.belongsTo(Product);
+
 
 module.exports = {
   ...sequelize.models,
