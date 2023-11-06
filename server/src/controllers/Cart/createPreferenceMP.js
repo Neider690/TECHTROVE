@@ -30,7 +30,7 @@ const createPreference = async (req, res) => {
         });
       }}
 
-    // console.log("cart en preference back",cart );
+    // ("cart en preference back",cart );
     // console.log("email en preference back",email );
 
     //   const productDetail = {
