@@ -30,9 +30,9 @@ router.get("/filter", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const { name } = req.query; 
-    console.log(name);
+    //console.log(name);
     let products = name ? await getAllProducts(name) : await getAllProducts();
-    console.log(products);
+    //console.log(products);
     res.json(products);
   } catch (error) {
     console.log(error.message);
@@ -91,6 +91,11 @@ router.put("/update/:id", fileUpload({
   try {
     const { id } = req.params;
     const data = req.body;
+    if(!req.files?.image){
+      const product = await putProduct(id, data);
+  
+      return res.status(200).json(product);
+    }
 
     if(req.files?.image){
       
