@@ -1,13 +1,21 @@
 const { User } = require("../../db");
-const mercadopago = require("mercadopago")
+const mercadopago = require('mercadopago');
+require('dotenv').config()
+
+const { ACCESS_TOKEN } = process.env;
+
+// Configurar mercado pago
+mercadopago.configure({
+    access_token:ACCESS_TOKEN
+})
 
 
-
+const userEmail = ""
 
 const createPreference = async (req, res) => {
   try {
     const cart = req.body.cart;
-    const email = req.body.email;
+    userEmail = req.body.email;
     //if para ver si carrito esta vacio devolver error throw new Error ("")
     let items =[] 
     for (const item of cart) {
@@ -35,8 +43,8 @@ const createPreference = async (req, res) => {
 
     //items.push(productDetail);
     const result = await mercadopago.preferences.create({
-      payer_email: "test_user_1398180221@testuser.com",
-      items,
+      payer_email: "test_user_1929113170@testuser.com",
+      items,        
       back_urls: {
         success: `http://localhost:5173/`,
 
