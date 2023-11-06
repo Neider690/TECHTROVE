@@ -5,9 +5,9 @@ const deleteProduct = async (productId) => {
 
   if (!product) throw new Error('Product not found');
 
-  if (!product.isAvailable) throw new Error('Product is already deleted');
+  if (!product.isAvailible) throw new Error('Product is already deleted');
 
-  product.isAvailable = false;
+  product.isAvailible = false;
   await product.save();
 };
 

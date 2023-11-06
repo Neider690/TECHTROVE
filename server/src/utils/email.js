@@ -19,7 +19,7 @@ const sendRegistrationEmail = async (clientId) => {
     }
 
     const mailOptionsRegistro = {
-      from: "neogn@support.com",
+      from: "techtrove31@gmail.com",
       to: user.email, // correo electrónico almacenado en User
       subject: "Successful registration",
       html: `
@@ -322,7 +322,7 @@ const sendPurchaseEmail = async (user, order) => {
     }
 
     const mailOptionsCompra = {
-      from: "test.ecomerce420@gmail.com",
+      from: "techtrove.ecommerce@gmail.com",
       to: user.email,
       subject: "Purchase confirmation",
       html: getStatusBasedEmailHtml(user, productList, order.status),
