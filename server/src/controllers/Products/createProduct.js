@@ -11,18 +11,19 @@ const generateSKU = () => {
   return sku;
 };
 
-const createProduct = async (data) => {
+const createProduct = async (data, imageProfile) => {
   const product = {
     ...data,
     id: data.SKU ? data.SKU : generateSKU(),
+    image: {url: imageProfile.url, public_id: imageProfile.public_id}
   };
 
   let {
-    id: productId,
+    id,
     name,
-    description,
     category,
-    images,
+    description,
+    image,
     price,
     stock,
     SKU,
@@ -34,9 +35,9 @@ const createProduct = async (data) => {
   const newProduct = await db.Product.create({
     id,
     name,
-    description,
     category,
-    images,
+    description,
+    image,
     price,
     stock,
     SKU,

@@ -1,9 +1,12 @@
 const db = require("../../db");
-const getPage = require("./getProductsPage");
 
-const getFilteredProducts = async (category, min, max, order, page) => {
+
+const getFilteredProducts = async (category, min, max, order) => {
   let products = await db.Product.findAll();
 
+  if (category && category !== "Categories") {
+    products = products.filter((product) => product.category === category);
+  }
   if (category) {
     products = products.filter((product) => product.category === category);
   }
@@ -36,9 +39,9 @@ const getFilteredProducts = async (category, min, max, order, page) => {
     }
   }
 
-  page = page && page > 0 ? page : 1;
+  
 
-  return getPage(page, products);
+  return (products);
 };
 
 module.exports = getFilteredProducts;

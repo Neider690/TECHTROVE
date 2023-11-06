@@ -11,12 +11,12 @@ module.exports = (sequelize) => {
 
             name: {
                 type:  DataTypes.STRING,
-                allowNull: true,
+                allowNull: false,
             },
 
             category: {
                 type: DataTypes.STRING,
-                allowNull: true,
+                allowNull: false,
             },
 
             color: {
@@ -35,14 +35,14 @@ module.exports = (sequelize) => {
                 allowNull: true,
             },
 
-            isAvalible: {
+            isAvailible: {
                 type: DataTypes.BOOLEAN,
-                allowNull: true,
+                defaultValue: true,
             },
 
             price: {
                 type: DataTypes.FLOAT,
-                allowNull: true,
+                allowNull: false,
             },
 
             stock: {
