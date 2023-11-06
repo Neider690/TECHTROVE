@@ -8,7 +8,7 @@ const mercadopago = require("mercadopago")
 const server = express();
 
 mercadopago.configure({
-  access_token: 'TEST-4914905142543976-103122-04ca601495c18894faff9c061fc3fce1-449805935', // Reemplaza con tu Access Token de Mercado Pago
+  access_token: 'TEST-5086227672674538-110222-7839aafa4431dc1b05c0b8a500c561ed-1533103381', 
 });
 server.use(helmet.contentSecurityPolicy({
     directives: {
