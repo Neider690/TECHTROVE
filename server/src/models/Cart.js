@@ -10,8 +10,6 @@ module.exports = (sequelize) => {
     preferenceId: {
       type: DataTypes.STRING,
     },
-    userId: {
-      type: DataTypes.INTEGER,
-    },
+   
   });
 };
