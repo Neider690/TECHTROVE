@@ -7,6 +7,10 @@ const processedRequests = new Set();
 
 const receiveWebHook = async (req, res) => {
   try {
+    console.log("Recibiendo notificación de Mercado Pago...");
+    console.log("Cuerpo de la solicitud:", req.body);
+    console.log("Query params:", req.query);
+    console.log("Parámetros:", req.params);
     const { query } = req;
     const { params } = req;
     console.log("params", params.userId);
@@ -28,9 +32,10 @@ const receiveWebHook = async (req, res) => {
 
      switch (topic) {
       case "payment":
+        console.log("Notificación de pago recibida");
         const paymentId = requestId; 
         console.log(topic, "getting payment", paymentId);
-        payment = await mercadopago.payment.findById(paymentId);
+       let payment = await mercadopago.payment.findById(paymentId);
         console.log("payment.body", payment.body);
 
         var { body } = await mercadopago.merchant_orders.findById(
@@ -39,6 +44,7 @@ const receiveWebHook = async (req, res) => {
         break;
 
       case "merchant_order":
+        console.log("Notificación de orden de pago recibida");
         const orderId = requestId; 
         console.log(topic, "getting merchant order", orderId);
         var { body } = await mercadopago.merchant_orders.findById(orderId);
@@ -57,11 +63,12 @@ const receiveWebHook = async (req, res) => {
       console.log("El pago se completó 😄");
       try {
         if (params.userId && params.userId.trim() !== "") {
+          console.log("creando oreden de compra")     
           const createUserResponse = await axios.post(
             "http://localhost:3001/api/orders",
-            {
-              userId: params.userId,
-              paymentId: requestId,
+            {        
+              paymentMethod: requestId,
+              userId: params.userId,             
               status: body.order_status,
               total: body.paid_amount,
               products: body.items,

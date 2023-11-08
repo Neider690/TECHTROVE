@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
     "Order",
     {
       paymentId: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
+        
       },
       status: {
         type: DataTypes.STRING,
