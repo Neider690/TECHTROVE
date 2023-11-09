@@ -2,6 +2,7 @@ const server = require("./src/server");
 const { conn  } = require("./src/db.js");
 const { PORT } = process.env;
 
+
 const dataProducts = require("./api/db.json");
 
 const { Product, User } = require("./src/db");
