@@ -4,17 +4,26 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Order",
     {
+      
       paymentId: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.INTEGER,
+        defaultValue: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
+        
+      },
+       userId: {
+        type: DataTypes.UUID, 
+        references: {
+          model: 'Users',
+         // key: 'id',
+        },
       },
       status: {
         type: DataTypes.STRING,
         defaultValue: false,
       },
       total: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT, 
       },
       paymentMethod: {
         type: DataTypes.STRING,
@@ -22,6 +31,7 @@ module.exports = (sequelize) => {
       },
       preferenceId: {
         type: DataTypes.STRING,
+        
       },
       products: {
         type: DataTypes.ARRAY(DataTypes.JSON),

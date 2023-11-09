@@ -48,7 +48,7 @@ userRouter.post("/signUp",fileUpload({
       // const { clientId, name, email } = req.body;
        const user = req.body;
 
-       console.log(user)
+      // console.log(user)
       
 
       // if(req.files?.image){

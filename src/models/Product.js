@@ -35,6 +35,10 @@ module.exports = (sequelize) => {
                 allowNull: true,
             },
 
+            imageCloudinary: {
+                type: DataTypes.ARRAY(DataTypes.JSON), // Usamos un array de objetos JSON
+            },
+
             isAvailible: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true,

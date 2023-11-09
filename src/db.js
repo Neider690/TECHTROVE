@@ -8,10 +8,13 @@ const userModel = require("./models/User");
 const cartModel = require("./models/Cart")
 
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DATA } = process.env;
+
+// const sequelize = new Sequelize(
+//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  DB_DATA,
   {
     logging: false,
     native: false,
@@ -24,13 +27,17 @@ cartModel(sequelize);
 productModel(sequelize);
 userModel(sequelize);
 
-const { User, Order, Product } = sequelize.models;
+const { User, Order, Product, Cart} = sequelize.models;
 
 Product.belongsToMany(User, { through: "ProductsUser" });
 User.belongsToMany(Product, { through: "ProductsUser" });
 
-User.hasMany(Order);
-Order.belongsTo(User);
+User.hasMany(Order, { foreignKey: 'userId' });
+Order.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasOne(Cart, { foreignKey: 'userId' });
+Cart.belongsTo(User, { foreignKey: 'userId' });
+
 
 module.exports = {
   ...sequelize.models,

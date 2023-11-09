@@ -10,7 +10,7 @@ const routerFavorites = require("./routerFavorites")
 router.use("/products", routerProduct)
 router.use("/users", routerUser)
 router.use("/orders", routerOrder)
-router.use("/cart", routerCart)
+router.use("/payment", routerCart)
 router.use("/admin", routerAdmin)
 router.use("/favorites", routerFavorites)
 
