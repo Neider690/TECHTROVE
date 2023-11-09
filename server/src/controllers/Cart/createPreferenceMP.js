@@ -16,6 +16,10 @@ const createPreference = async (req, res) => {
   try {
     const cart = req.body.cart;
     userEmail = req.body.email;
+
+   
+    
+    
     //if para ver si carrito esta vacio devolver error throw new Error ("")
     let items =[] 
     for (const item of cart) {
@@ -43,27 +47,28 @@ const createPreference = async (req, res) => {
 
     //items.push(productDetail);
     const result = await mercadopago.preferences.create({
-      payer_email: "test_user_1929113170@testuser.com",
+      payer_email: "test_user_1802045022@testuser.com",
       items,        
       back_urls: {
         success: `http://localhost:5173/`,
 
       },
-      notification_url: "https://4040-190-97-127-163.ngrok.io/payment/webhook",
+      notification_url: `https://7153-186-29-183-168.ngrok-free.app/payment/webhook/`,
       auto_return: "approved",
     });
     res.json({
       result: result.body.init_point,
       // Identificador único que puedes utilizar para referenciar y gestionar esa preferencia en futuras interacciones con la API de Mercado Pago
     });
-  
+    
 
 
   
     
   } catch (error) {
-    console.error(error);
+    console.error("Error en createPreference:", error);
     res.status(500).json({ error: "An error occurred: " + error.message });
+    console.error(error);
   }
     // let preference = {
     //   transaction_amount,
