@@ -11,19 +11,21 @@ const generateSKU = () => {
   return sku;
 };
 
-const createProduct = async (data, imageProfile) => {
+const createProduct = async (data, imageProfile, imageInfoArray, prueba) => {
+  //console.log(prueba, "prueeee")
   const product = {
     ...data,
     id: data.SKU ? data.SKU : generateSKU(),
-    image: {url: imageProfile.url, public_id: imageProfile.public_id}
+    //image: {url: imageProfile.url, public_id: imageProfile.public_id},
+    imageCloudinary: imageInfoArray
   };
+  //console.log(product, "ololololo-----------------------------------")
 
   let {
     id,
     name,
     category,
     description,
-    image,
     price,
     stock,
     SKU,
@@ -31,13 +33,14 @@ const createProduct = async (data, imageProfile) => {
     rating,
     averageRating,
     isAvailable,
+    imageCloudinary
   } = product;
+
   const newProduct = await db.Product.create({
     id,
     name,
     category,
     description,
-    image,
     price,
     stock,
     SKU,
@@ -45,8 +48,9 @@ const createProduct = async (data, imageProfile) => {
     rating,
     averageRating,
     isAvailable,
+    imageCloudinary
   });
-
+  console.log(newProduct, "newwwwww----")
   return newProduct;
 };
 
