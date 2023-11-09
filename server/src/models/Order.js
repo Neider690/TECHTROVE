@@ -5,8 +5,8 @@ module.exports = (sequelize) => {
     "Order",
     {
       paymentId: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        defaultValue: DataTypes.INTEGER,
         primaryKey: true,
         
       },
@@ -15,14 +15,15 @@ module.exports = (sequelize) => {
         defaultValue: false,
       },
       total: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER, 
       },
       paymentMethod: {
         type: DataTypes.STRING,
         defaultValue: "Mercado Pago",
       },
       preferenceId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        
       },
       products: {
         type: DataTypes.ARRAY(DataTypes.JSON),
