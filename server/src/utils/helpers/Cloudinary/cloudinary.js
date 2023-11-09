@@ -10,6 +10,7 @@ cloudinary.config({
 });
 
 const uploadImage = async function uploadImage(filePath) {
+  console.log("filePath",filePath);
   return await cloudinary.uploader.upload(filePath, {
       folder: 'techtroveimages'
   })

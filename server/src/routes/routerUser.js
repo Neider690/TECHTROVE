@@ -100,6 +100,11 @@ userRouter.post("/signUp",fileUpload({
       const { id } = req.params;
       const data = req.body;
       
+      if (!req.files?.image) {
+        const user = await putUser(id, data );
+        return res.status(200).json(user);
+      }
+
       if(req.files?.image){
         const userImage = await getUser(id)
         const imageProfile = await updateImageUser(req.files.image.tempFilePath, userImage.image.public_id)
