@@ -22,18 +22,22 @@ const allowedOrigins = [
   //"https://deploy",
   "http://localhost:5173", 
 ];
-server.use(cors({
-  origin: function (origin, callback) {
+// server.use(cors({
+//   origin: function (origin, callback) {
     
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("No permitido por CORS"));
-    }
-  },
-  credentials: true,
-}));
-
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("No permitido por CORS"));
+//     }
+//   },
+//   credentials: true,
+// }));
+server.use(cors({
+  origin:"*"
+}))
 server.use("/api", router);
+
+
 
 module.exports = server;

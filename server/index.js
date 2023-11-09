@@ -1,17 +1,18 @@
 const server = require("./src/server");
 const { conn  } = require("./src/db.js");
+const { PORT } = process.env;
 
 const dataProducts = require("./api/db.json");
 
 const { Product, User } = require("./src/db");
-const PORT = 3001;
+const PORTb = 3001;
 
 const ratingCalculator = require("./src/utils/helpers/Average/ratingAvera");
 
 conn
   .sync({ force: false })
   .then(() => {
-    server.listen(PORT, async () => {
+    server.listen(PORT || PORTb, async () => {
       let idHard = "SKU000";
 
       const users = dataProducts.users.map((user) => {
@@ -58,7 +59,7 @@ conn
       }
 
 
-      console.log(`Server listening on port ${PORT}`);
+      console.log(`Server listening on port ${PORTb}`);
     });
   })
   .catch((error) => console.error(error));
