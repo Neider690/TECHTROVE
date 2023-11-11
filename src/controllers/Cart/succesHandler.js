@@ -4,7 +4,7 @@ const succesHandlers = async (req, res) => {
         console.log(info)
         const infoJson = JSON.stringify(info)
 
-        res.status(200).redirect(`https://techtrove-front.vercel.app/paymentsucces/?data=${encodeURIComponent(infoJson)}`)
+        res.status(200).redirect(`http://localhost:5173/paymentsucces/?data=${encodeURIComponent(infoJson)}`)
     } catch (error) {
         console.log(error)
     }

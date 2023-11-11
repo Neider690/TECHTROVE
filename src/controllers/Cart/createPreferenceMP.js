@@ -23,13 +23,13 @@ const createPreference = async (req, res) => {
     //if para ver si carrito esta vacio devolver error throw new Error ("")
     let items =[] 
     for (const item of cart) {
-      const price = parseFloat(item.price); // Convertir a número
+      const price = parseFloat(item.price); 
       if (!isNaN(price)) {
         items.push({
           id: item.id,
           quantity: item.quantity,
           title: item.name,
-          unit_price: price, // Usar el precio convertido
+          unit_price: price, 
           currency_id: "ARS",
         });
       }}
@@ -37,7 +37,7 @@ const createPreference = async (req, res) => {
       payer_email: "test_user_1802045022@testuser.com",
       items,        
       back_urls: {
-        success: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
+        success: `http://localhost:3001/api/payment/succes`,
         failure: `http://localhost:3001/api/payment/failure`,
         pending: `http://localhost:3001/api/payment/pending`
 
