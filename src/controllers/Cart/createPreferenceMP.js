@@ -1,5 +1,6 @@
 const { User } = require("../../db");
 const mercadopago = require('mercadopago');
+//const ngrok = require('ngrok');
 require('dotenv').config()
 
 const { ACCESS_TOKEN } = process.env;
@@ -37,12 +38,12 @@ const createPreference = async (req, res) => {
       payer_email: "test_user_1802045022@testuser.com",
       items,        
       back_urls: {
-        success: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
-        failure: `http://localhost:3001/api/payment/failure`,
-        pending: `http://localhost:3001/api/payment/pending`
+        success: `http://localhost:3001/api/payment/succes`,
+        failure: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
+        pending: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
 
-      },
-      notification_url: `https://7153-186-29-183-168.ngrok-free.app/payment/webhook/`,
+      },      notification_url: `https://ec26-186-155-75-36.ngrok-free.app/payment/webhook/`,
+
       auto_return: "approved",
     });
     res.json({
