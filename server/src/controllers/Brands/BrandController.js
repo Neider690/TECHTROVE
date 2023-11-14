@@ -79,21 +79,41 @@ const getBrandByName = async (req, res) => {
   };
   
   // Buscar una marca por ID
+  // const getBrandById = async (req, res) => {
+  //   try {
+  //     const { id } = req.params;
+  //     const brand = await db.Brands.findByPk(id);
+  
+  //     if (!brand) {
+  //       return res.status(404).json({ error: "Marca no encontrada" });
+  //     }
+  
+  //     res.status(200).json(brand);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //     res.status(500).json({ error: "Error al buscar la marca por ID" });
+  //   }
+  // };
   const getBrandById = async (req, res) => {
     try {
       const { id } = req.params;
+  
+      // Imprime el ID en la consola para verificar su valor
+      console.log("ID:", id);
+  
       const brand = await db.Brands.findByPk(id);
   
       if (!brand) {
         return res.status(404).json({ error: "Marca no encontrada" });
       }
-  
+      console.log(id);
       res.status(200).json(brand);
     } catch (error) {
-      console.error(error.message);
+      console.error(id);
       res.status(500).json({ error: "Error al buscar la marca por ID" });
     }
   };
+  
   
   module.exports = {
     getBrands,

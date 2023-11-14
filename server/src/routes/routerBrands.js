@@ -13,7 +13,7 @@ router.post("/", brandsController.createBrand);
 router.put("/:id", brandsController.updateBrand);
 
 // Eliminar una marca
-router.delete("/:id", brandsController.deleteBrand);
+router.delete("/delete/:id", brandsController.deleteBrand);
 
 router.get("/:name", brandsController.getBrandByName);
 
