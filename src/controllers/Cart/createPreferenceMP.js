@@ -42,8 +42,8 @@ const createPreference = async (req, res) => {
         failure: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
         pending: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
 
-      },      notification_url: `https://ec26-186-155-75-36.ngrok-free.app/payment/webhook/`,
-
+      },
+      notification_url: `https://7153-186-29-183-168.ngrok-free.app/payment/webhook/`,
       auto_return: "approved",
     });
     res.json({
