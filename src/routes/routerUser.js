@@ -99,6 +99,18 @@ userRouter.post("/signUp",fileUpload({
     try {
       const { id } = req.params;
       const data = req.body;
+      const arrayUserFav = []
+      console.log(data.wishlist)
+
+      if(data.wishlist){
+        const user = await putUser(id, data );
+        return res.status(200).json(user);
+      }
+
+      if (!req.files?.image) {
+        const user = await putUser(id, data );
+        return res.status(200).json(user);
+      }
       
       if (!req.files?.image) {
         const user = await putUser(id, data );

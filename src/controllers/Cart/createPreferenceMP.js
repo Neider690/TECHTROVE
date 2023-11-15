@@ -38,7 +38,7 @@ const createPreference = async (req, res) => {
       payer_email: "test_user_1802045022@testuser.com",
       items,        
       back_urls: {
-        success: `http://localhost:3001/api/payment/succes`,
+        success: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
         failure: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
         pending: `https://techtrove-back-dev-qpzn.1.us-1.fl0.io/api/payment/succes`,
 

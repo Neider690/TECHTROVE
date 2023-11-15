@@ -68,8 +68,22 @@ router.post("/create", fileUpload({
     const data = req.body;
     const imageInfoArray = [];
     const prueba = imageInfoArray
+    //console.log(data, "una imagen")
+
+    if(data.Unaimage){
+      const imageProfile = await uploadImage(data.Unaimage)
+      const imageInfo = {
+        url: imageProfile.secure_url, 
+        public_id: imageProfile.public_id, 
+      };
+      imageInfoArray.push(imageInfo);
+      console.log(imageInfoArray, "array con una imagen")
+      const newProduct = await createProduct(data, imageInfoArray,prueba);
+      return res.status(200).json(newProduct);
+    }
     
     for (const image of req.body.image) {
+      console.log("varias imagenes")
       const imageProfile = await uploadImage(image)
       //console.log("holaaaa", imageProfile)
       //fs.unlink(req.files.image.tempFilePath)
@@ -80,7 +94,7 @@ router.post("/create", fileUpload({
     
       imageInfoArray.push(imageInfo);
     }
-    //console.log(imageInfoArray)
+    
 
     const newProduct = await createProduct(data, imageInfoArray,prueba);
     res.status(200).json(newProduct);
@@ -113,6 +127,18 @@ router.put("/update/:id", fileUpload({
     const imageInfoArray = [];
     const products = await getProductById(id);
     const prueba = imageInfoArray
+    console.log(data)
+
+    if(data.Unaimage){
+      const imageProfile = await uploadImage(data.Unaimage)
+      const imageInfo = {
+        url: imageProfile.secure_url, 
+        public_id: imageProfile.public_id, 
+      };
+      imageInfoArray.push(imageInfo);
+      const product = await putProduct(id, data, imageInfoArray);
+      return res.status(200).json(product);
+    }
 
     if(!req.body.image){
       const product = await putProduct(id, data);

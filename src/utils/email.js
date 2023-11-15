@@ -96,7 +96,7 @@ function getStatusBasedEmailHtml(email, paymentId, products, status, total) {
                 <p>If you have any questions or need help with your order, don't hesitate to contact us.</p>
                 <p>We hope you enjoy your purchase and come back soon!</p>
                 <p>Click the button below to visit our site:</p>
-                <a class="cta-button" href="http://localhost:5173/">Visit TechTrove</a>
+                <a class="cta-button" href="https://techtrove-front.vercel.app/">Visit TechTrove</a>
             </div>
             <p class="footer">© 2023 TechTrove. All rights reserved.</p>
         </div>
@@ -178,7 +178,7 @@ function getStatusBasedEmailHtml(email, paymentId, products, status, total) {
               <p>If you have any problems with the payment or need more information, do not hesitate to contact us.</p>
               <p>We hope to see you soon at TechTrove!</p>
               <p>Click the button below to visit our site:</p>
-              <a class="cta-button" href="http://localhost:5173/">Visit TechTrove</a>
+              <a class="cta-button" href="https://techtrove-front.vercel.app/">Visit TechTrove</a>
           </div>
           <p class="footer">© 2023 TechTrove. All rights reserved.</p>
       </div>

@@ -28,8 +28,7 @@ cartModel(sequelize);
 productModel(sequelize);
 userModel(sequelize);
 brandModel(sequelize);
-
-const { User, Order, Product, Cart,Brands} = sequelize.models;
+const { User, Order, Product, Cart, Brands } = sequelize.models;
 
 Product.belongsToMany(User, { through: "ProductsUser" });
 User.belongsToMany(Product, { through: "ProductsUser" });
@@ -40,9 +39,6 @@ Order.belongsTo(User, { foreignKey: 'userId' });
 User.hasOne(Cart, { foreignKey: 'userId' });
 Cart.belongsTo(User, { foreignKey: 'userId' });
 
-
-
-// Brands.belongsToMany(Product, { through: "ProductsBrand" });
 Product.hasOne(Brands)
 Brands.belongsTo(Product);
 

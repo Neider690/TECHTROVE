@@ -24,12 +24,12 @@ const createProduct = async (data, imageProfile, imageInfoArray, prueba) => {
   let {
     id,
     name,
-    brand,
     category,
     description,
     price,
     stock,
     SKU,
+    brand,
     discount,
     rating,
     averageRating,
@@ -52,7 +52,7 @@ const createProduct = async (data, imageProfile, imageInfoArray, prueba) => {
     isAvailable,
     imageCloudinary
   });
-  console.log(newProduct, "newwwwww----")
+  //console.log(newProduct, "newwwwww----")
   return newProduct;
 };
 
