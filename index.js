@@ -61,7 +61,6 @@ conn
 
 
       console.log(`Server listening on port ${PORTb}`);
-      console.log(`Server listening on port ${PORT}`);
     });
   })
   .catch((error) => console.error(error));

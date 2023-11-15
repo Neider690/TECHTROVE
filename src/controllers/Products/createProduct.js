@@ -24,6 +24,7 @@ const createProduct = async (data, imageProfile, imageInfoArray, prueba) => {
   let {
     id,
     name,
+    brand,
     category,
     description,
     price,
@@ -39,6 +40,7 @@ const createProduct = async (data, imageProfile, imageInfoArray, prueba) => {
   const newProduct = await db.Product.create({
     id,
     name,
+    brand,
     category,
     description,
     price,
